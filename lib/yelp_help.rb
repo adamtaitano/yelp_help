@@ -1,2 +1,3 @@
 require_relative "./yelp_help/version"
+require_relative './yelp_help/suggestion'
 require_relative './yelp_help/cli'

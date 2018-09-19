@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/yelp_help'
+require "bundler/setup"
+require "yelp_help"
 
 YelpHelp::CLI.new.call
-YelpHelp::CLI.new.list_restaurant
