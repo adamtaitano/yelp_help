@@ -1,12 +1,20 @@
 class YelpHelp::Suggestion
   attr_accessor :name, :rating, :type
   @@all = []
-
+  #Initialize Suggestion using user input
+  def initialize(location = [nil], search_type = "")
+    #Set URL based on user input
+    location = ["portland", "or"]
+    search_type = "burgers"
+    @@url = "https://www.yelp.com/search?find_desc=#{search_type}&find_loc=#{location[0]}%2C+#{location[1]}&ns=1"
+  end
   #Scrape yelp based on user input
   def self.scrape_suggestions
     suggestions = []
     #go to yelp, enter url based on input data
-    doc = Nokogiri::HTML(open("https://yelp.com"))
+    puts @@url
+    doc = Nokogiri::HTML(open(@@url, 'User-Agent' => 'Ruby/2.4.1'))
+    suggestion_title = doc.search("li.regular-search-result h3.search-result-title")[0].search("a.biz-name").text
     binding.pry
     #extract suggestion properties
     #instantiate a suggestion
