@@ -6,6 +6,7 @@ class YelpHelp::CLI
     # list_suggestions
     # navigate
     parse_user_input
+    list_user_input
     goodbye
   end
 
@@ -17,7 +18,7 @@ class YelpHelp::CLI
   end
 
   def list_user_input
-    @city ? @user_input = @city + ", " + @state : @user_input = @zipcode
+    @city ? @user_input = @city.to_s + ", " + @state.to_s : @user_input = @zipcode
     @user_input
   end
 
@@ -25,21 +26,23 @@ class YelpHelp::CLI
     input = nil
       ##Ask for user input to refine search location and search type
       puts "Welcome to Yelp Help. Please enter your nearest city, state, or zipcode."
-      input = gets.strip.downcase
-      #Determine what type of input - City and State, City, or Zip
-      split = input.split(" ")
-      if split.size > 1
-        @city = split[0]
-        @state = split[1]
-        @city + @state
-      elsif input.match? /\A\d+\z/
-        @zipcode = input.to_i
-        @zipcode
-      else
-        puts "Please enter your nearest city, state, or zipcode."
-        parse_user_input
+      while input == nil
+        input = gets.strip.downcase
+        #Determine what type of input - City and State, City, or Zip
+        split = input.split(", ")
+        if split.size > 1
+          @city = split[0]
+          @state = split[1]
+        elsif input.match? /\A\d+\z/
+          @zipcode = input
+        elsif input
+          @city = input
+        else
+          puts "Please enter your nearest city, state, or zipcode."
+          input = nil
+        end
       end
-    puts @city || @state || @zipcode
+      # puts "Thank you for your input. You typed in: " + input + ". Is this correct?"
   end
 
   def navigate
