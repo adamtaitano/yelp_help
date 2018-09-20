@@ -18,13 +18,12 @@ class YelpHelp::Suggestion
     #First suggestion element
     suggestion_title = suggestions_array[0].search("a.biz-name span").text
     suggestion_rating = suggestions_array[0].search("div.i-stars")[0].values[1]
-    # suggestion_price_category = suggestions_array[0].search("span.price-range").text
-    # ##Need to iterate upon each element of category
-    # suggestion_category_list = suggestions_array[0].search("span.category-str-list a[href]")[0].text
-    # ##remove lines and white space from address result
-    # suggestion_address = suggestions_array[0].search("div address").text
-    # suggestion_neighborhood = suggestions_array[0].search("span.neighborhood-str-list").text
-    # suggestion_snippet = suggestions_array[0].search("p.snippet").text
+    suggestion_price_category = suggestions_array[0].search("span.price-range").text
+    # ##Need to iterate upon each element of category - find size of array and add each element to variable
+    suggestion_category_list = suggestions_array[0].search("span.category-str-list a[href]")[0].text
+    suggestion_address = suggestions_array[0].search("div address").text.strip
+    suggestion_neighborhood = suggestions_array[0].search("span.neighborhood-str-list").text.strip
+    suggestion_snippet = suggestions_array[0].search("p.snippet").text.strip
     binding.pry
     #extract suggestion properties
     #instantiate a suggestion
