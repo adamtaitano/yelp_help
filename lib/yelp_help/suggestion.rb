@@ -43,17 +43,25 @@ class YelpHelp::Suggestion
       puts "#{hash[:list_number]}. " + "#{hash[:title]}" + " - #{hash[:rating]}."
     end
   end
+
+  def category_join(array = nil)
+    return array.to_s if array.nil? or array.length <= 1
+    array[0..-2].join(", ") + " and " + array[-1]
+  end
   #present one suggetion result to cli
   def present_single_suggestion(list_number = 1)
     suggestion = @instance_data.select{|suggestion| suggestion[:list_number] == list_number}
     hash = suggestion[0]
+    category_array = hash[:category_list]
+    clean_category_array = category_array.map{|str| str.gsub(/\W/,'')}
+    category_string = category_join(clean_category_array)
+    clean_snippet = hash[:snippet][1..-36]
     puts "#{hash[:list_number]}. #{hash[:title]} - #{hash[:rating]}"
-    puts "Price Range: #{hash[:price]} out of $$$"
-    puts "Category: #{hash[:category_list]}."
+    puts "Price Range: #{hash[:price]} out of $$$$"
+    puts "Category: #{category_string}."
     puts "Neighborhood: #{hash[:neighborhood]}."
     puts "Address: #{hash[:address]}."
-    puts "Description snippet: #{hash[:snippet]}."
-    binding.pry
+    puts "Description snippet: #{clean_snippet}"
   end
 
 end
