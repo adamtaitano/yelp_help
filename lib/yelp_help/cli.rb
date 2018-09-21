@@ -24,22 +24,22 @@ class YelpHelp::CLI
       puts "Please enter your nearest city, state, or zipcode."
       while input == nil
         @untouched_location = gets.chomp
-        input = @untouched_input.strip.downcase
+        input = @untouched_location.rstrip.downcase
         #Determine what type of input - City and State, City, or Zip
         @user_location = input.split(", ")
-        if split.size > 1
-          @city = split[0]
-          @state = split[1]
+        if @user_location.size > 1
+          @city = @user_location[0]
+          @state = @user_location[1]
         elsif input.match? /\A\d+\z/
-          @zipcode = input
+          @zipcode = @user_location[0]
         elsif input
-          @location = input
+          @location = @user_location[0]
         else
           puts "I'm sorry I didn't get that. Please re-enter your nearest city, state, or zipcode."
           input = nil
         end
       end
-      input = list_user_input[0]
+      input = convert_user_location
       puts "Thank you for your input. You typed in: #{@untouched_location}. Is this correct? (y/n)"
       answer = gets.chomp.downcase
       if answer == 'y'
@@ -73,6 +73,7 @@ class YelpHelp::CLI
   end
 
   def enter_user_input
+    @user_location = convert_user_location
     instance = YelpHelp::Suggestion.new(@user_location, @user_type)
     instance.scrape_suggestions
     instance.present_list_of_names
@@ -83,15 +84,15 @@ class YelpHelp::CLI
       list_count += 5
       instance.present_list_of_names(list_count, list_count+5)
     elsif answer == "q"
-      break
+      puts "Goodbye!"
     else
       puts "I'm sorry, I didn't get that. Please enter the number for more infomation, type 'more' for extra recommendations, or 'q' to quit."
     end
   end
 
-  def list_user_input
-    @city ? @user_location = @city.to_s + ", " + @state.to_s : @user_location = @zipcode
-    [@user_location, @user_type]
+  def convert_user_location
+    @user_location.size > 1 ? @user_location = @city.to_s + ", " + @state.to_s : @user_location = @zipcode
+    @user_location
   end
 
 

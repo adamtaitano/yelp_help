@@ -2,12 +2,19 @@ class YelpHelp::Suggestion
   attr_accessor :name, :location, :search_type, :instance_data, :suggestion
   @@all_data = []
   #Initialize Suggestion using user input
-  def initialize(location = [nil], search_type = "")
+  def initialize(location = nil, search_type = "")
     #Set URL based on user input
     @instance_data = [nil]
-    @location = ["portland"]
-    @search_type = "car+repair"
-    @url = "https://www.yelp.com/search?find_desc=#{@search_type}&find_loc=#{@location[0]}%2C+#{@location[1]}&ns=1"
+    @location = location
+    @state = nil
+    if @location.size > 1
+      @city = @location[0]
+      @state = @location[1]
+    else
+      @city = @location
+    end
+    @search_type = search_type
+    @url = "https://www.yelp.com/search?find_desc=#{@search_type}&find_loc=#{@city}%2C+#{@state}&ns=1"
   end
   #Scrape yelp based on user input
   def scrape_suggestions
