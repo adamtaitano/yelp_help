@@ -5,8 +5,8 @@ class YelpHelp::Suggestion
   def initialize(location = [nil], search_type = "")
     #Set URL based on user input
     @instance_data = [nil]
-    @location = ["il"]
-    @search_type = "pancakes"
+    @location = ["portland"]
+    @search_type = "car+repair"
     @url = "https://www.yelp.com/search?find_desc=#{@search_type}&find_loc=#{@location[0]}%2C+#{@location[1]}&ns=1"
   end
   #Scrape yelp based on user input
