@@ -1,8 +1,7 @@
 # YelpHelp
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yelp_help`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+YelpHelp is a basic command-line interface that scrapes data from a specific search query using yelp.com.
+YelpHelp asks the user for their location and a type of business to provide recommendations. It then uses nokogiri and open-uri to extract data from a specific yelp search query, formating and presenting the data to the user. In other words, it's similar to using yelp, but performed in the terminal as a CLI.
 
 ## Installation
 
@@ -22,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This CLI is a final project for the Flatiron Web Developer Online Course. It demonstrates the student's ability to create a command-line interface, create Class objects that interact and inheret with each other, and scrape and format data from a webpage without using an API.
 
 ## Development
 
