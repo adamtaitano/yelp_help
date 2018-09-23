@@ -1,7 +1,7 @@
 # YelpHelp
 
 YelpHelp is a basic command-line interface that scrapes data from a specific search query using yelp.com.
-YelpHelp asks the user for their location and a type of business to provide recommendations. It then uses nokogiri and open-uri to extract data from a specific yelp search query, formating and presenting the data to the user. In other words, it's similar to using yelp, but performed in the terminal as a CLI.
+YelpHelp asks the user for their location, and a type of business to provide the user with recommendations. It then uses nokogiri and open-uri to extract html data from a specific yelp search query, formating and presenting the data to the user. In other words, it's similar to using yelp, but performed in the terminal as a CLI.
 
 ## Installation
 
